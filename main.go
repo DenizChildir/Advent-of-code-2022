@@ -77,16 +77,15 @@ func move(arry [][]string, a, b, c, size int) [][]string {
 	x := len(arry)
 	y := len(arry[0])
 	t := make([][]string, x)
-
 	for i := 0; i < len(t); i++ {
 		t[i] = make([]string, y)
 	}
 	for i := 0; i < x; i++ {
 		for j := 0; j < y; j++ {
-			//fmt.Println(arry[j][i])
 			t[j][i] = arry[i][j]
 		}
 	}
+
 	for i := 0; i < len(t[0]); i++ {
 		temp := t[b-1]
 		if temp[i] == " " {
@@ -96,27 +95,46 @@ func move(arry [][]string, a, b, c, size int) [][]string {
 			break
 		}
 	}
-
 	temp := t[b-1]
 	temp2 := temp[0:a]
-	//t[c-1] = append(temp2, t[c-1]...)
-	fmt.Println(len(t[c]))
-
-	for i := len(t[c]) - 1; i > -1; i-- {
-		if t[c-1][i] != " " {
-			continue
+	for i := len(t[0]) - 1; i > -1; i-- {
+		if t[c-1][i] == " " {
+			t[c-1] = t[c-1][1:]
 		}
-		t[c-1][i] = temp2[0]
-		temp2 = temp2[1:]
+
 	}
 
 	slices.Reverse(temp2)
-	t[c-1] = append(temp2, t[c-1]...)
+	newSlice := make([]string, 0)
+	newSlice = append(newSlice, temp2...)
+	newSlice = append(newSlice, t[c-1]...)
+	t[c-1] = newSlice
 
-	//fmt.Println(temp2)
-	//fmt.Println(t[c-1])
 	t[b-1] = t[b-1][a:]
-	fmt.Println(t)
+	//fmt.Println(t)
 
+	// Find the length of the longest inner slice
+	maxLen := 0
+	for _, row := range t {
+		if len(row) > maxLen {
+			maxLen = len(row)
+		}
+	}
+	fmt.Println(maxLen)
+	ret := make([][]string, 9)
+	for i := 0; i < len(t); i++ {
+		ret[i] = make([]string, 0)
+	}
+	for i := 0; i < len(t); i++ {
+		//ret[i] = make([]string, 1)
+		//fmt.Println("a")
+		for j := 0; j < len(t[i]); j++ {
+			//fmt.Println("b")
+			ret[i] = append(ret[i], t[i][j])
+		}
+		//temp := []string{}
+		//ret = append(ret, temp)
+	}
+	fmt.Println(ret)
 	return t
 }
