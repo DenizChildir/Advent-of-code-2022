@@ -1,5 +1,13 @@
 package main
 
-func main() {
+import (
+	"io/ioutil"
+	"os"
+)
 
+func main() {
+	input, _ := os.Open("input.txt")
+	defer input.Close()
+	xxx, _ := ioutil.ReadAll(input)
+	str := string(xxx)
 }

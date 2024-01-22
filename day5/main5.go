@@ -22,7 +22,7 @@ func main5() {
 		{"N", "C", "S", "L", "T", "Z", "B", "W"},
 		{"L", "S", "G"}}
 	r := regexp.MustCompile(`(?s)(\d+)`)
-	input, _ := os.Open("input.txt")
+	input, _ := os.Open("input.txt.txt")
 	defer input.Close()
 	xxx, _ := ioutil.ReadAll(input)
 	mv := r.FindAllString(string(xxx), -1)
@@ -99,9 +99,9 @@ func move(ar [][]string, N, a, b int) [][]string {
 //func main() {
 //	ar, size := parse()
 //	r := regexp.MustCompile(`(?s)(\d+)`)
-//	input, _ := os.Open("input.txt")
-//	defer input.Close()
-//	xxx, _ := ioutil.ReadAll(input)
+//	input.txt, _ := os.Open("input.txt.txt")
+//	defer input.txt.Close()
+//	xxx, _ := ioutil.ReadAll(input.txt)
 //	mv := r.FindAllString(string(xxx), -1)
 //	mv2 := make([][]int, len(mv)/3)
 //	for i := 0; i < len(mv2); i++ {

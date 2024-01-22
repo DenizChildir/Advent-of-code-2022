@@ -11,7 +11,7 @@ import (
 )
 
 func main1() {
-	input, _ := os.Open("input.txt")
+	input, _ := os.Open("input.txt.txt")
 	defer input.Close()
 	xxx, _ := ioutil.ReadAll(input)
 	str := string(xxx)
