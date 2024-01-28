@@ -1,4 +1,4 @@
-package main
+package day_7
 
 import (
 	"fmt"
@@ -9,20 +9,20 @@ import (
 	"strings"
 )
 
-type file struct {
-	name string
-	size int
-}
+//type file struct {
+//	name string
+//	size int
+//}
+//
+//type folder struct {
+//	name  string
+//	sub   []*folder // Changed to a slice of pointers to folder structs
+//	files []*file
+//	size  int
+//	par   *folder
+//}
 
-type folder struct {
-	name  string
-	sub   []*folder // Changed to a slice of pointers to folder structs
-	files []*file
-	size  int
-	par   *folder
-}
-
-func main1() {
+func main2() {
 	input, _ := os.Open("input.txt")
 	defer input.Close()
 	xxx, _ := ioutil.ReadAll(input)
@@ -31,18 +31,28 @@ func main1() {
 	//fmt.Printf("%q", str)
 	root := parse(str)
 	size(root)
-	fmt.Println(count(root))
+	//s := root.size
+
+	fmt.Println(count(root, root.size))
 
 }
-func count(cur *folder) int {
-	counter := 0
+func count2(cur *folder, ar []int) []int {
+	ar = append(ar, cur.size)
 	for _, child := range cur.sub {
-		counter += count(child)
+		ar = count2(child, ar)
 	}
-	if cur.size <= 100000 {
-		counter += cur.size
+	return ar
+}
+func count(cur *folder, temp int) int {
+	recSize := temp
+	for _, child := range cur.sub {
+		recSize = count(child, recSize)
 	}
-	return counter
+	if cur.size >= 6552309 && cur.size < recSize {
+		recSize = cur.size
+		return recSize
+	}
+	return recSize
 }
 
 func size(cur *folder) {
