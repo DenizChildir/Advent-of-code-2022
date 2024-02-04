@@ -23,7 +23,7 @@ import (
 //}
 
 func main2() {
-	input, _ := os.Open("coding_qual_input.txt")
+	input, _ := os.Open("input.txt")
 	defer input.Close()
 	xxx, _ := ioutil.ReadAll(input)
 	str2 := string(xxx)

@@ -9,7 +9,7 @@ import (
 )
 
 func main4() {
-	input, _ := os.Open("coding_qual_input.txt.txt")
+	input, _ := os.Open("input.txt.txt")
 	defer input.Close()
 	xxx, _ := ioutil.ReadAll(input)
 	str2 := string(xxx)
@@ -38,4 +38,4 @@ func isover(str string) int {
 	return 1
 }
 
-//for the coding_qual_input.txt ["2" "2" "19" "30"], why does the second if statement return true
+//for the input.txt ["2" "2" "19" "30"], why does the second if statement return true

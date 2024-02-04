@@ -8,7 +8,7 @@ import (
 )
 
 func main3() {
-	input, _ := os.Open("coding_qual_input.txt.txt")
+	input, _ := os.Open("input.txt.txt")
 	defer input.Close()
 	xxx, _ := ioutil.ReadAll(input)
 	re := regexp.MustCompile(`(?s)([[:alnum:]]+)`)
@@ -23,9 +23,9 @@ func main3() {
 
 /*
 	func main() {
-		coding_qual_input.txt, _ := os.Open("coding_qual_input.txt.txt")
-		defer coding_qual_input.txt.Close()
-		xxx, _ := ioutil.ReadAll(coding_qual_input.txt)
+		input.txt, _ := os.Open("input.txt.txt")
+		defer input.txt.Close()
+		xxx, _ := ioutil.ReadAll(input.txt)
 		stz := string(xxx)
 		re:=regexp.MustCompile(`(?s)([[:alnum:]])`)
 		stz=re.FindAllString(stz,-1)

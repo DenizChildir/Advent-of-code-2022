@@ -7,7 +7,7 @@ import (
 )
 
 func main6() {
-	input, _ := os.Open("coding_qual_input.txt")
+	input, _ := os.Open("input.txt")
 	defer input.Close()
 	xxx, _ := ioutil.ReadAll(input)
 	str := string(xxx)

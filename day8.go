@@ -1,8 +1,8 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"regexp"
 	"strconv"
@@ -10,28 +10,57 @@ import (
 )
 
 func main() {
-	file, _ := os.Open("coding_qual_input.txt")
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	wordMap := make(map[int]string)
-	for scanner.Scan() {
-		line := scanner.Text()
-		re := regexp.MustCompile(`(\d+) (\w+)`)
-		match := re.FindStringSubmatch(line)
-		if match != nil {
-			position, _ := strconv.Atoi(match[1])
-			wordMap[position] = match[2]
-		}
-	}
-	var message []string
-	for i, n := 1, 0; ; i++ {
-		n = i * (i + 1) / 2
-		if word, ok := wordMap[n]; ok {
-			message = append(message, word)
+	input, _ := os.Open("input.txt")
+	defer input.Close()
+	xxx, _ := ioutil.ReadAll(input)
+	str2 := string(xxx)
+	re := regexp.MustCompile(`(\w+) (-?\d+)`)
+	strArry := strings.Split(str2, "\n")
+	//q := []int{}
+	//timer := 0
+	reg := 1
+	cyc := 1
+	fmt.Println(len(strArry))
+	for i := 0; i < len(strArry); i++ {
+
+		op := re.FindAllStringSubmatch(strArry[i], -1)
+		if len(op) == 0 {
+			//fmt.Println("cyc=", cyc, " reg=", reg, " i=", i, "noop")
+			cyc++
+			fmt.Println("cyc=", cyc, " reg=", reg, " i=", i, "noop")
+			continue
 		} else {
-			break
+			temp, _ := strconv.Atoi(op[0][2])
+			//fmt.Println("cyc=", cyc, " reg=", reg, " i=", i, " temp=", temp)
+			cyc += 2
+			fmt.Println("cyc=", cyc-1, " reg=", reg, " i=", i, " temp=", temp)
+			reg += temp
+			fmt.Println("cyc=", cyc, " reg=", reg, " i=", i, " temp=", temp)
+			continue
 		}
+
 	}
-	printMessage := strings.Join(message, " ")
-	fmt.Println("Decoded message:", printMessage)
+	//for i := 0; i < len(strArry); i++ {
+	//	fmt.Println(i, " ", reg)
+	//	op := re.FindAllStringSubmatch(strArry[i], -1)
+	//	if timer%2 == 0 && len(q) > 0 {
+	//		reg = reg + q[0]
+	//		q = append(q[:0], q[0+1:]...)
+	//
+	//	}
+	//	if len(op) == 0 {
+	//		continue
+	//	} else {
+	//		timer++
+	//		temp, _ := strconv.Atoi(op[0][2])
+	//		q = append(q, temp)
+	//	}
+	//
+	//	if i == 20 || i == 60 || i == 100 || i == 140 || i == 180 || i == 220 {
+	//		//sum = sum + (reg * i)
+	//	}
+	//
+	//}
+	fmt.Println(reg)
+
 }
